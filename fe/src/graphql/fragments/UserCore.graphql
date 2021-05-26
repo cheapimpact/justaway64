@@ -1,0 +1,5 @@
+fragment UserCore on User {
+  id
+  email
+  username
+}
