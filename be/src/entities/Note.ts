@@ -1,20 +1,16 @@
-import { Field, Int, ObjectType } from "type-graphql";
+import { Field, FieldResolver, Int, ObjectType, Root } from "type-graphql";
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { Image } from "./Image";
 import { User } from "./User";
-
-/**
- * @ObjectType()
- * @Field()
- * its for the graphQL
- */
 
 @ObjectType()
 @Entity()
@@ -39,8 +35,13 @@ export class Note extends BaseEntity {
   @Column()
   creatorId: number;
 
+  @Field()
   @ManyToOne(() => User, (user) => user.notes)
   creator: User;
+
+  @Field(() => [Image], { nullable: true })
+  @OneToMany(() => Image, (image) => image.note)
+  images: Image[];
 
   @Field(() => String)
   @CreateDateColumn()

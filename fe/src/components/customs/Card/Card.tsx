@@ -28,12 +28,21 @@ export const Card: React.FC<CardProps> = ({ children, ...BoxProps }) => {
 
 interface CardHeaderProps extends BoxProps {}
 
-export const CardHeader: React.FC<CardHeaderProps> = ({ children }) => {
+export const CardHeader: React.FC<CardHeaderProps> = ({
+  children,
+  ...props
+}) => {
   const { colorMode } = useColorMode();
   const bgColor = { light: "gray.200", dark: "gray.700" };
   const color = { light: "black", dark: "white" };
   return (
-    <Box top={0} mt={0} bg={bgColor[colorMode]} color={color[colorMode]}>
+    <Box
+      top={0}
+      mt={0}
+      bg={bgColor[colorMode]}
+      color={color[colorMode]}
+      {...props}
+    >
       {children}
     </Box>
   );

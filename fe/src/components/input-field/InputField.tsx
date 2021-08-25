@@ -9,8 +9,10 @@ import {
   FormLabel,
   Input,
   InputGroup,
+  InputProps,
   InputRightElement,
   Select,
+  Switch,
   Textarea,
   useColorMode,
 } from "@chakra-ui/react";
@@ -20,7 +22,7 @@ import { defaultColor } from "../../utils/defaultColor";
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
   name: string;
-  variant?: "textarea" | "select" | "checkbox" | "number" | null;
+  variant?: "textarea" | "select" | "checkbox" | "number" | "switch" | null;
   inline?: boolean;
   options?: any;
   noLabel?: boolean;
@@ -31,6 +33,7 @@ type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   rigtElementIsLoading?: boolean;
   isChecked?: boolean;
   isDisabled?: boolean;
+  ref?: React.LegacyRef<HTMLInputElement> | undefined;
 };
 
 export const InputField: React.FC<InputFieldProps> = ({
@@ -58,6 +61,9 @@ export const InputField: React.FC<InputFieldProps> = ({
       break;
     case "checkbox":
       C = Checkbox;
+      break;
+    case "switch":
+      C = Switch;
       break;
     default:
       break;

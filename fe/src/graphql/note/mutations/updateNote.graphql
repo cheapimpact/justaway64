@@ -1,0 +1,16 @@
+mutation UpdateNote($input: NoteInput!, $id: Int!) {
+  updateNote(input: $input, id: $id) {
+    note {
+      id
+      isPublic
+      creatorId
+      title
+      text
+      updatedAt
+    }
+    errors {
+      field
+      message
+    }
+  }
+}

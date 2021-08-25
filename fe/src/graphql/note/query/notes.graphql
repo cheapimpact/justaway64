@@ -1,0 +1,19 @@
+query Notes($limit: Int!, $cursor: String) {
+  notes(limit: $limit, cursor: $cursor) {
+    notes {
+      id
+      createdAt
+      updatedAt
+      title
+      isPublic
+      textSnippet
+      canEdit
+      creator {
+        id
+        username
+        email
+      }
+    }
+    hasMore
+  }
+}

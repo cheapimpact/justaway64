@@ -20,7 +20,8 @@
     "baseUrl": "src",
     "paths": {
       "@components/*": ["components/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@css/*": ["css/*"]
     }
   },
   "exclude": ["node_modules"],

@@ -1,0 +1,12 @@
+query NoteImages($noteId: Int!) {
+  images(noteId: $noteId) {
+    id
+    filename
+    filepath
+    ocr
+    event
+    noteId
+    createdAt
+    updatedAt
+  }
+}

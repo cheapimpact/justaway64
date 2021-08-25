@@ -1,0 +1,13 @@
+mutation UploadImage($image: Upload!, $noteId: Int!, $event: String) {
+  UploadImage(file: $image, noteId: $noteId, event: $event) {
+    image {
+      id
+      filepath
+      ocr
+      noteId
+      createdAt
+      updatedAt
+    }
+    error
+  }
+}

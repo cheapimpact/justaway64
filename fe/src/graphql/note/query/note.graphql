@@ -1,0 +1,18 @@
+query Note($id: Int!) {
+  note(id: $id) {
+    id
+    title
+    text
+    isPublic
+    creatorId
+    createdAt
+    updatedAt
+    canEdit
+    images {
+      filename
+      filepath
+      ocr
+      event
+    }
+  }
+}

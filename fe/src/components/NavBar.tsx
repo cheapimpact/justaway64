@@ -32,7 +32,11 @@ import {
   FaSignOutAlt,
   FaRegLaughWink,
   FaRegLaugh,
+  FaItunesNote,
+  FaStickyNote,
+  FaLinkedin,
 } from "react-icons/fa";
+import { CgNotes } from "react-icons/cg";
 import { useMeQuery, useLogoutMutation } from "../generated/graphql";
 import { isServer } from "../utils/isServer";
 
@@ -69,20 +73,17 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
   if (!data?.me) {
     rightEl = (
       <NextLink href="/login">
-        <Link aria-label="Go to justaway Login page">
-          <Button
-            isLoading={fetching}
-            size="md"
-            fontSize="lg"
-            aria-label={`Log in`}
-            variant="ghost"
-            color="current"
-            ml={3}
-            leftIcon={<FaSignInAlt />}
-          >
-            Login
-          </Button>
-        </Link>
+        <Button
+          size="md"
+          fontSize="lg"
+          aria-label={`Log in`}
+          variant="ghost"
+          color="current"
+          ml={3}
+          leftIcon={<FaSignInAlt />}
+        >
+          Login
+        </Button>
       </NextLink>
     );
   } else {
@@ -93,7 +94,6 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
             <>
               <Button
                 as={MenuButton}
-                isLoading={fetching}
                 size="md"
                 fontSize="lg"
                 aria-label={`Log in`}
@@ -157,7 +157,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
             </chakra.a>
           </NextLink>
           <Text variant="ghost" fontSize="20px" color="current">
-            justaway64
+            h3h3
           </Text>
         </Flex>
         <Flex
@@ -168,44 +168,68 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
           maxW="1100px"
         >
           <HStack spacing="5" bg="gray.20" rounded="md" p="3">
-            <Link
-              isExternal
-              aria-label="Go to justaway GitHub page"
-              href="https://github.com/cheapimpact"
+            <NextLink href="/notes" as={`/notes`}>
+              <Link aria-label="Notes">
+                <Icon
+                  as={CgNotes}
+                  display="block"
+                  w="5"
+                  h="5"
+                  _hover={{ color: "gray.600" }}
+                />
+              </Link>
+            </NextLink>
+            <NextLink
+              href="https://www.linkedin.com/in/abdurrochman-h-hasibuan-744bb6207/"
+              passHref
             >
-              <Icon
-                as={GithubIcon}
-                display="block"
-                transition="color 0.2s"
-                w="5"
-                h="5"
-                _hover={{ color: "gray.600" }}
-              />
-            </Link>
-            <Link aria-label="Go to justaway Discord page" href="/discord">
-              <Icon
-                as={DiscordIcon}
-                display="block"
-                transition="color 0.2s"
-                w="5"
-                h="5"
-                _hover={{ color: "gray.600" }}
-              />
-            </Link>
-            <Link
-              isExternal
-              aria-label="Go to justaway Instagram page"
-              href="https://www.instagram.com/abdhsb1/"
-            >
-              <Icon
-                as={FaInstagram}
-                display="block"
-                transition="color 0.2s"
-                w="5"
-                h="5"
-                _hover={{ color: "gray.600" }}
-              />
-            </Link>
+              <Link isExternal aria-label="Go to justaway LinkedIn page">
+                <Icon
+                  as={FaLinkedin}
+                  display="block"
+                  transition="color 0.2s"
+                  w="5"
+                  h="5"
+                  _hover={{ color: "gray.600" }}
+                />
+              </Link>
+            </NextLink>
+            <NextLink href="https://github.com/cheapimpact" passHref>
+              <Link isExternal aria-label="Go to justaway GitHub page">
+                <Icon
+                  as={GithubIcon}
+                  display="block"
+                  transition="color 0.2s"
+                  w="5"
+                  h="5"
+                  _hover={{ color: "gray.600" }}
+                />
+              </Link>
+            </NextLink>
+            <NextLink href="/discord" passHref>
+              <Link isExternal aria-label="Go to justaway Discord page">
+                <Icon
+                  as={DiscordIcon}
+                  display="block"
+                  transition="color 0.2s"
+                  w="5"
+                  h="5"
+                  _hover={{ color: "gray.600" }}
+                />
+              </Link>
+            </NextLink>
+            <NextLink href="https://www.instagram.com/abdhsb1/" passHref>
+              <Link isExternal aria-label="Go to justaway Instagram page">
+                <Icon
+                  as={FaInstagram}
+                  display="block"
+                  transition="color 0.2s"
+                  w="5"
+                  h="5"
+                  _hover={{ color: "gray.600" }}
+                />
+              </Link>
+            </NextLink>
           </HStack>
           <IconButton
             size="md"

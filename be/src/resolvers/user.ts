@@ -7,6 +7,8 @@ import {
   InputType,
   ObjectType,
   Query,
+  FieldResolver,
+  Root,
 } from "type-graphql";
 import { User } from "../entities/User";
 import { MyContext } from "../type";
@@ -15,6 +17,8 @@ import { COOKIE_NAME, FORGET_PASSWORD_PREFIX } from "../constants";
 import { sendEmail } from "../utils/sendEmail";
 import { v4 } from "uuid";
 import { getConnection } from "typeorm";
+import { FieldError } from "./responseShape";
+import { Note } from "../entities/Note";
 
 @InputType()
 class UsernamePasswordInput {
@@ -27,14 +31,6 @@ class UsernamePasswordInput {
 }
 
 @ObjectType()
-class FieldError {
-  @Field()
-  field: String;
-  @Field()
-  message: String;
-}
-
-@ObjectType()
 class UserResponse {
   @Field(() => [FieldError], { nullable: true })
   errors?: FieldError[];
@@ -43,17 +39,25 @@ class UserResponse {
   user?: User;
 }
 
-@Resolver()
+@Resolver(User)
 export class UserResolver {
+  @FieldResolver(() => String)
+  email(@Root() user: User, @Ctx() { req }: MyContext) {
+    // cara handling cuma nampilin email yg user id nya sama kaya login
+    if (req.session.userId === user.id) {
+      return user.email;
+    }
+    return "";
+  }
+
   @Query(() => User, { nullable: true })
   async me(@Ctx() { req }: MyContext) {
     //not logged in
     const session = req.session;
     console.log({ session });
-
-    // if (!req.session.userId) {
-    //   return null;
-    // }
+    if (!req.session.userId) {
+      return null;
+    }
     const user = await User.findOne(req.session.userId);
     return user;
   }
